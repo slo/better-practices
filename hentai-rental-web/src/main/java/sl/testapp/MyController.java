@@ -31,6 +31,12 @@ public class MyController {
 		g2.setName("The Elder Scrolls: Morrowind");
 		graDAO.save(g2);
 
+		final Gra g3 = new Gra();
+		g3.setId(3L);
+		g3.setName("DOOM");
+		graDAO.save(g3);
+
+
 		final Resulcik r = new Resulcik();
 		r.setMsg("dfasdfa2s");
 		r.setCode(234234);
