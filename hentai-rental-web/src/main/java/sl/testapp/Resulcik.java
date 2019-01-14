@@ -1,6 +1,6 @@
 package sl.testapp;
 
-public class Resulcik {
+class Resulcik {
 	private String msg;
 	private int code;
 	public String getMsg() {

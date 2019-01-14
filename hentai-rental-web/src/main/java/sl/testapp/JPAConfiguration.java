@@ -19,10 +19,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "sl.testapp")
-public class JPAConfiguration {
+class JPAConfiguration {
 
 	@Bean
-	public DataSource getDataSource() {
+	DataSource getDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
 		dataSource.setUrl("jdbc:hsqldb:mem:datavault_test");
@@ -32,7 +32,7 @@ public class JPAConfiguration {
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		final LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
 		entityManager.setDataSource(getDataSource());
 		entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -51,14 +51,14 @@ public class JPAConfiguration {
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+	PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
 	}
 
 	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+	PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 

@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.common.collect.Lists;
 
 @RestController
-public class MyController {
+class MyController {
 
 	@Autowired
 	private GraDAO graDAO;
 
 	@RequestMapping("/hello")
-	public String hello() {
+	String hello() {
 		return "Hell NO!!!";
 	}
 
 	@RequestMapping("/hello2")
-	public Resulcik hello2() {
+	Resulcik hello2() {
 		final Gra g = new Gra();
 		g.setId(1L);
 		g.setName("Quake");
@@ -44,7 +44,7 @@ public class MyController {
 	}
 
 	@RequestMapping("/hello3")
-	public List<Gra> hello3() {
+	List<Gra> hello3() {
 		return Lists.newArrayList(graDAO.findAll());
 	}
 
