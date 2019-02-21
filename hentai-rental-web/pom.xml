@@ -43,14 +43,35 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
-	<dependency>
-		<groupId>com.google.guava</groupId>
-		<artifactId>guava</artifactId>
-	</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.spockframework/spock-core -->
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+
 
 	</dependencies>
 	<build>
-		<plugins>
+        <plugins>
+   <plugin>
+       <groupId>org.codehaus.gmavenplus</groupId>
+       <artifactId>gmavenplus-plugin</artifactId>
+       <version>1.6.2</version>
+       <executions>
+           <execution>
+               <goals>
+                   <goal>addTestSources</goal>
+                   <goal>compileTests</goal>
+               </goals>
+           </execution>
+       </executions>
+   </plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.2</version>
