@@ -1,14 +1,22 @@
 package sl.testapp;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-class Gra {
+public class Gra {
 	@Id
 	private Long id;
-
+	@NotEmpty(message = "Message is required.")
 	private String name;
+
+	@Version
+	private Calendar created = Calendar.getInstance();
 
 	public Long getId() {
 		return id;
@@ -24,6 +32,14 @@ class Gra {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Calendar getCreated() {
+		return created;
+	}
+
+	public void setCreated(Calendar created) {
+		this.created = created;
 	}
 
 }
