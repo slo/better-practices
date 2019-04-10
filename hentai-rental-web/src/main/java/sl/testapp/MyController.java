@@ -3,23 +3,26 @@ package sl.testapp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Lists;
 
-@RestController
+@Controller
 class MyController {
 
 	@Autowired
 	private GraDAO graDAO;
 
-	@RequestMapping("/hello")
+	@GetMapping("/hello")
 	String hello() {
-		return "Hell NO!!!";
+		return "hellno";
 	}
 
 	@RequestMapping("/hello2")
+	@ResponseBody
 	Resulcik hello2() {
 		final Gra g = new Gra();
 		g.setId(1L);
