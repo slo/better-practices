@@ -25,9 +25,10 @@ class JPAConfiguration {
 	DataSource getDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
-		dataSource.setUrl("jdbc:hsqldb:file:///g:/tools/hsqldb/data/hentaidb/hentaidb");
-		dataSource.setUsername("BOBEK");
-		dataSource.setPassword("BOBEK");
+		// dataSource.setUrl("jdbc:hsqldb:file:///g:/tools/hsqldb/data/hentaidb/hentaidb");
+		dataSource.setUrl("jdbc:hsqldb:mem:hentaidb");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
 		return dataSource;
 	}
 
@@ -42,12 +43,11 @@ class JPAConfiguration {
 		jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
 		jpaProperties.setProperty("hibernate.show_sql", "true");
 		jpaProperties.setProperty("hibernate.format_sql", "true");
-		// jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		// jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		jpaProperties.setProperty("jadira.usertype.autoRegisterUserTypes", "true");
 
 		entityManager.setJpaProperties(jpaProperties);
-
 		return entityManager;
 	}
 
