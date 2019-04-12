@@ -1,13 +1,19 @@
 package sl.testapp;
 
-import java.util.Calendar;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 class MyController {
@@ -59,15 +65,34 @@ class MyController {
 		return new ModelAndView("redirect:/list");
 	}
 
-		final Resulcik r = new Resulcik();
-		r.setMsg("dfasdfa2s");
-		r.setCode(234234);
-		return r;
+	@GetMapping("{id}")
+	ModelAndView view(@PathVariable("id") Long id) {
+		final Optional<Gra> graResult = graDAO.findById(id);
+		if (graResult.isPresent()) {
+			return new ModelAndView("view", "gra", graResult.get());
+		}
+		return new ModelAndView("redirect:/list");
+
 	}
 
-	@RequestMapping("/list")
-	ModelAndView hello3() {
-		return new ModelAndView("hellno", "games", graDAO.findAll());
+	@GetMapping("/list")
+	ModelAndView list() {
+		return new ModelAndView("list", "games", graDAO.findAll());
+	}
+
+	@GetMapping(params = "form")
+	String createForm(@ModelAttribute Gra gra) {
+		return "create";
+	}
+
+	@PostMapping
+	ModelAndView create(@Valid Gra gra, BindingResult result, RedirectAttributes redirect) {
+		if (result.hasErrors()) {
+			return new ModelAndView("form");
+		}
+		gra = graDAO.save(gra);
+		redirect.addFlashAttribute("globalMessage", "Succesfully added a new game");
+		return new ModelAndView("redirect:/{gra.id}", "gra.id", gra.getId());
 	}
 
 }
