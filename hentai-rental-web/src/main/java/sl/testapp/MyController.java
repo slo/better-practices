@@ -20,27 +20,44 @@ class MyController {
 		return "hellno";
 	}
 
-	@RequestMapping("/hello2")
+	@GetMapping("/fill")
 	@ResponseBody
-	Resulcik hello2() {
+	ModelAndView hello2() {
 		final Gra g = new Gra();
-		g.setId(1L);
-		g.setName("Quake");
-		g.setCreated(Calendar.getInstance());
+		g.setName("Doom");
 		graDAO.save(g);
 
+		final Gra g1 = new Gra();
+		g1.setName("Quake 2");
+		graDAO.save(g1);
 		final Gra g2 = new Gra();
-		g2.setId(2L);
-		g2.setName("The Elder Scrolls: Morrowind");
-		g2.setCreated(Calendar.getInstance());
+		g2.setName("Need For Speed");
 		graDAO.save(g2);
-
 		final Gra g3 = new Gra();
-		g3.setId(3L);
-		g3.setName("DOOM");
-		g3.setCreated(Calendar.getInstance());
+		g3.setName("Race On");
 		graDAO.save(g3);
 
+		//		final Gra g = new Gra();
+		//		g.setId(1L);
+		//		g.setName("Quake");
+		//		g.setCreated(Calendar.getInstance());
+		//		graDAO.save(g);
+		//
+		//		final Gra g2 = new Gra();
+		//		g2.setId(2L);
+		//		g2.setName("The Elder Scrolls: Morrowind");
+		//		g2.setCreated(Calendar.getInstance());
+		//		graDAO.save(g2);
+		//
+		//		final Gra g3 = new Gra();
+		//		g3.setId(3L);
+		//		g3.setName("DOOM");
+		//		g3.setCreated(Calendar.getInstance());
+		//		graDAO.save(g3);
+
+
+		return new ModelAndView("redirect:/list");
+	}
 
 		final Resulcik r = new Resulcik();
 		r.setMsg("dfasdfa2s");
