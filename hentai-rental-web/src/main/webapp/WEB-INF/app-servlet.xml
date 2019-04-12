@@ -17,6 +17,7 @@
 		<property name="suffix" value=".jspx" />
 	</bean>
 
-	<!-- <mvc:resources mapping="/static/**" location="/static/" cache-period="1"/> -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
 
 </beans>
