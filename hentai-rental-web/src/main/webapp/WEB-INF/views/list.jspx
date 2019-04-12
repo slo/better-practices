@@ -15,6 +15,7 @@
   <body>
     <div class="container">
       <h1>Games : List</h1>
+	  <div class="pull-right"><a href="./fill">FILL !!!</a></div>
       <div class="pull-right"><a href="./?form">Add Game</a></div>
       <table class="table">
         <thead>
