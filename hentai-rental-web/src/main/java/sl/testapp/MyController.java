@@ -1,5 +1,6 @@
 package sl.testapp;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,9 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 class MyController {
 
 	@Autowired
-	private GraDAO graDAO;
+	private GraRepository graRepository;
 
 	@GetMapping("/hello")
+	@ResponseBody
 	String hello() {
 		return "hellno";
 	}
@@ -31,17 +33,16 @@ class MyController {
 	ModelAndView hello2() {
 		final Gra g = new Gra();
 		g.setName("Doom");
-		graDAO.save(g);
-
+		graRepository.save(g);
 		final Gra g1 = new Gra();
 		g1.setName("Quake 2");
-		graDAO.save(g1);
+		graRepository.save(g1);
 		final Gra g2 = new Gra();
 		g2.setName("Need For Speed");
-		graDAO.save(g2);
+		graRepository.save(g2);
 		final Gra g3 = new Gra();
 		g3.setName("Race On");
-		graDAO.save(g3);
+		graRepository.save(g3);
 
 		//		final Gra g = new Gra();
 		//		g.setId(1L);
@@ -67,7 +68,7 @@ class MyController {
 
 	@GetMapping("{id}")
 	ModelAndView view(@PathVariable("id") Long id) {
-		final Optional<Gra> graResult = graDAO.findById(id);
+		final Optional<Gra> graResult = graRepository.findById(id);
 		if (graResult.isPresent()) {
 			return new ModelAndView("view", "gra", graResult.get());
 		}
@@ -77,7 +78,7 @@ class MyController {
 
 	@GetMapping("/list")
 	ModelAndView list() {
-		return new ModelAndView("list", "games", graDAO.findAll());
+		return new ModelAndView("list", "games", graRepository.findAll());
 	}
 
 	@GetMapping(params = "form")
@@ -90,9 +91,15 @@ class MyController {
 		if (result.hasErrors()) {
 			return new ModelAndView("form");
 		}
-		gra = graDAO.save(gra);
+		gra = graRepository.save(gra);
 		redirect.addFlashAttribute("globalMessage", "Succesfully added a new game");
 		return new ModelAndView("redirect:/{gra.id}", "gra.id", gra.getId());
+	}
+
+	@GetMapping("/filter/{str}")
+	@ResponseBody
+	List<Gra> find(@PathVariable("str") String finder) {
+		return graRepository.getGamesNamedLike(finder);
 	}
 
 }
