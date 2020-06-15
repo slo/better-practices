@@ -1,7 +1,8 @@
-n/
 target/
 .project
 .classpath
 .settings/
 
+.gradle/
+*/build/
 *.iml
