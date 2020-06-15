@@ -24,9 +24,11 @@ class JPAConfiguration {
 	@Bean
 	DataSource getDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
+		//dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
+		dataSource.setDriverClassName("org.h2.Driver");
 		// dataSource.setUrl("jdbc:hsqldb:file:///g:/tools/hsqldb/data/hentaidb/hentaidb");
-		dataSource.setUrl("jdbc:hsqldb:mem:hentaidb");
+		//dataSource.setUrl("jdbc:hsqldb:mem:hentaidb");
+		dataSource.setUrl("jdbc:h2:mem:test;TRACE_LEVEL_FILE=3");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		return dataSource;
@@ -40,7 +42,8 @@ class JPAConfiguration {
 		entityManager.setPackagesToScan("sl.testapp");
 
 		final Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+		//jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+		jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		jpaProperties.setProperty("hibernate.show_sql", "true");
 		jpaProperties.setProperty("hibernate.format_sql", "true");
 		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
